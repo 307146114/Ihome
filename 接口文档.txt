@@ -1,0 +1,101 @@
+接口文档
+1.获取验证码图片
+    url:/api/piccode?pre={PRE}&cur={CUR}
+    method:get
+    传入参数:
+       参数名称     类型      是否必带    说明
+        PRE       string      否       上一次保存的图片id
+        CUR       string      是       本次保存的图片id
+    返回参数:
+        img类型的图片的
+2.手机发送验证码
+    url:/api/smscode
+    method:post
+    传入参数:
+        json格式{"mobile":MOBILE,"piccode_id":PICCODE_ID,"PICCODE":piccode}
+       参数名称     类型      是否必带    说明
+        MOBILE       string      是       要接收的手机号码
+        PICCODE_ID   string      是       图片验证码的id
+        PICCODE      string      是       验证码的内容
+    返回参数:
+        json格式{'errcode':ERRCODE, 'errmsg':ERRMSG}
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功发送手机验证码;"4301":发送失败;'4501':发送时未知错误;'4003':手机注册;'4002'.'4004'数据库相关错误
+        ERRMSG     string      是       错误内容
+ 3.登录账号
+    url:/api/login
+    method:post
+    传入参数:
+        json格式{"mobile":MOBILE,"password":PASSWORD}
+       参数名称     类型      是否必带    说明
+        MOBILE       string      是     要接收的手机号码
+        PASSWORD   string      是       登录的账号
+    返回参数:
+        json格式{'errcode':ERRCODE, 'errmsg':ERRMSG}
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功'4102':账号密码错误;'4002'.'4004'数据库相关错误
+        ERRMSG     string      是       错误内容
+  4.注册账号
+    url:/api/register
+    method:post
+    传入参数:
+        json格式{"mobile":MOBILE,"phonecode":PHONECODE,'password':PASSWORD}
+       参数名称     类型      是否必带    说明
+        MOBILE       string      是     要接收的手机号码
+        PASSWORD   string      是       登录的账号
+        PHONECODE    string      是       手机接收到验证码
+    返回参数:
+        json格式{'errcode':ERRCODE, 'errmsg':ERRMSG}
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4001':查询数据库出错;'4002'.'4004'验证码错误或过期
+        ERRMSG     string      是       错误内容
+   5.断用户是否登录
+    url:/api/check_login
+    method:get
+    返回参数:
+        json格式{'errcode':ERRCODE, 'errmsg':ERRMSG}
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4102':用户未登录;'4002'.'4101'session存在异常
+        ERRMSG     string      是       错误内容
+   6.退出登录
+    url:/api/logout
+    method:get
+    返回参数:
+        json格式{'errcode':ERRCODE, 'errmsg':ERRMSG}
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4102':用户未登录;'4002'.'4101'session存在异常
+        ERRMSG     string      是       错误内容
+   7.获取用户信息
+    url:/api/profile
+    method:get
+    返回参数:
+        json格式{'errcode':ERRCODE, 'errmsg':ERRMSG}
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4102':用户登录有问题;.'4001'数据库查询异常
+        ERRMSG     string      是       错误内容
+   8.用户上传头像
+    url:/api/profile/avatar
+    method:post
+    参数名称     类型      是否必带    说明
+        avatar       bytes      是     要上传的图片
+    返回参数:
+        json格式{'errcode':ERRCODE, 'errmsg':ERRMSG}
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4103':上传参数异常;'4301':上传失败,'4001'数据库异常
+        ERRMSG     string      是       错误内容
+   9.修改用户名
+    url:/api/profile/name
+    method:post
+    参数名称     类型      是否必带    说明
+        name       string      是     要修改的用户名
+    返回参数:
+        json格式{'errcode':ERRCODE, 'errmsg':ERRMSG}
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4103':上传参数异常;'4301':上传失败,'4001'数据库异常
+        ERRMSG     string      是       错误内容
+
+
+
+
+
+
