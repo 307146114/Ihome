@@ -10,7 +10,8 @@ class BaseHandler(RequestHandler):
     def db_mysql(self):
         return self.application.db_mysql
     def set_default_headers(self):
-        pass
+        """设置默认json格式"""
+        self.set_header("Content-Type", "application/json; charset=UTF-8")
 
     def prepare(self):
         self.xsrf_token
@@ -22,9 +23,9 @@ class BaseHandler(RequestHandler):
     def write_error(self, status_code, **kwargs):
         pass
     def get_current_user(self):
-        session = Session(self)
+        self.session = Session(self)
         # 判断是否存在seesion.data,存在登录,不存在未登录
-        return session.data
+        return self.session.data
 
     # def flush(self, include_footers: bool = False) :
     #     pass

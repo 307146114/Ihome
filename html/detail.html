@@ -40,13 +40,13 @@
                 <div class="landlord-pic"><img src="{{house.user_avatar}}"></div>
                 <h2 class="landlord-name">房东： <span>{{house.user_name}}</span></h2>
             </div>
-            <div class="house-info layout-style">
+              <div class="house-info layout-style">
                <h3>房屋地址</h3>
                <ul class="house-info-list text-center">
                     <li>{{house.address}}</li>
                </ul>
             </div>
-            <ul class="house-type layout-style">
+               <ul class="house-type layout-style">
                 <li>
                     <span class="icon-house"></span>
                     <div class="icon-text">
@@ -77,6 +77,15 @@
                     <li>最多入住天数<span>{{if house.max_days==0}}无限制{{else}}{{house.max_days}}{{/if}}</span></li>
                 </ul>
             </div>
+           <div class="house-info layout-style">
+                <h3>房间详情</h3>
+                <ul class="house-info-list">
+                    <li>收取押金<span>{{(house.deposit/100.0).toFixed(0)}}</span></li>
+                    <li>最少入住天数<span>{{house.min_days}}</span></li>
+                    <li>最多入住天数<span>{{if house.max_days==0}}无限制{{else}}{{house.max_days}}{{/if}}</span></li>
+                </ul>
+            </div>
+
             <div class="house-facility layout-style">
                 <h3>配套设施</h3>
                 <ul class="house-facility-list clearfix">
@@ -105,7 +114,7 @@
                     <li><span class="{{if house.facilities.indexOf(23)>=0}}hotbathtub-ico{{else}}jinzhi-ico{{/if}}"></span>浴缸</li>
                 </ul>
             </div>
-            {{if house.comments.length }}
+                 {{if house.comments.length }}
             <div class="house-info layout-style">
                 <h3>评价信息</h3>
                 <ul class="house-comment-list">

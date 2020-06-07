@@ -15,6 +15,7 @@ class Application(tornado.web.Application):
         self.db_mysql = torndb_python3.Connection(**mysql_options)
         self.db_redis = Redis(**redis_options)
 
+
 def main():
     # 接卸命令行 参数
     tornado.options.parse_command_line()
