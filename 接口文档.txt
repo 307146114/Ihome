@@ -86,6 +86,7 @@
    9.修改用户名
     url:/api/profile/name
     method:post
+    json格式{'name':NAME}
     参数名称     类型      是否必带    说明
         name       string      是     要修改的用户名
     返回参数:
@@ -93,6 +94,210 @@
         参数名称     类型      是否必带    说明
         ERRCODE    string      是       '0':成功;'4103':上传参数异常;'4301':上传失败,'4001'数据库异常
         ERRMSG     string      是       错误内容
+   10.实名认证
+    url:/api/profile/auth
+    method:post
+   json格式{'real_name':REAL_NAME, 'id_card':ID_CARD}
+    参数名称     类型      是否必带    说明
+    REAL_NAME   string      是     真实姓名
+    ID_CARD   string      是     身份证号码
+    返回参数:
+        json格式{'errcode':ERRCODE, 'errmsg':ERRMSG}
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4103':上传参数异常;'4301':上传失败,'4001'数据库异常
+        ERRMSG     string      是       错误内容
+   10.获取实名认证
+    url:/api/profile/auth
+    method:get
+
+    返回参数:
+        json格式{'errcode':ERRCODE, 'errmsg':ERRMSG}
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4103':上传参数异常;'4301':上传失败,'4001'数据库异常
+        ERRMSG     string      是       错误内容
+   11.获取地区
+    url:/api/house/area
+    method:get
+
+    返回参数:
+        json格式{'errcode':ERRCODE, 'errmsg':ERRMSG,data =    {
+            "area_id": 2,
+            "name": "西城区"
+        },
+        {
+            "area_id": 3,
+            "name": "朝阳区"
+        }}
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4103':上传参数异常;'4301':上传失败,'4001'数据库异常
+        ERRMSG     string      是       错误内容
+        data        dict       否       返回的地区
+   12.获取发布的房源信息
+    url:/api/house/my
+    method:get
+
+    返回参数:
+        json格式{'errcode':ERRCODE, 'errmsg':ERRMSG,data =    {
+            "area_id": 2,
+            "name": "西城区"
+        },
+        {
+            "area_id": 3,
+            "name": "朝阳区"
+        }}
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4103':上传参数异常;'4301':上传失败,'4001'数据库异常
+        ERRMSG     string      是       错误内容
+        data        dict       否       返回的地区
+
+   13.获取发布的房源信息
+    url:/api/house/info
+    method:get
+
+    返回参数:
+
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4103':上传参数异常;'4301':上传失败,'4001'数据库异常
+        ERRMSG     string      是       错误内容
+        house        dict       否       房屋信息
+   14.获取发布的房源信息
+    url:/api/house/image$
+    method:post
+    参数名称     类型      是否必带    说明
+     house_id   string      是     房屋id
+     house_image   file      是     访问图片文件
+    返回参数:
+
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4103':上传参数异常;'4301':上传失败,'4001'数据库异常
+        ERRMSG     string      是       错误内容
+        url        string       否       上传图片的地址
+   15.获取发布的房源信息
+    url:/api/house/index$
+    method:get
+
+    返回参数:
+
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4103':上传参数异常;'4301':上传失败,'4001'数据库异常
+        ERRMSG     string      是       错误内容
+        houses     json       否       访问信息
+        areas     json       否       地区信息
+
+    16. 房屋过滤列表数据（没有使用缓存）
+    url:/api/house/list$
+    method:post
+    参数名称     类型      是否必带    说明
+     aid   string      是     房屋id
+     sd   string      是     地区id
+     ed   string      是     开始时间
+     sk   string      是     结束时间
+     p   string      是     访问的页数
+    返回参数:
+
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4103':上传参数异常;'4301':上传失败,'4001'数据库异常
+        ERRMSG     string      是       错误内容
+        data        json       否       房屋信息
+        total_page  string       否     总页数
+
+    16. 房屋过滤列表数据（使用缓存）
+    url:/api/house/list2$
+    method:post
+    参数名称     类型      是否必带    说明
+     aid   string      是     房屋id
+     sd   string      是     地区id
+     ed   string      是     开始时间
+     sk   string      是     结束时间
+     p   string      是     访问的页数
+    返回参数:
+
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4103':上传参数异常;'4301':上传失败,'4001'数据库异常
+        ERRMSG     string      是       错误内容
+        data        json       否       房屋信息
+        total_page  string       否     总页数
+    17. 我的订单，作为房客和房东同时适用
+    url:/api/order/list2$
+    method:post
+    参数格式：json
+
+    参数名称     类型      是否必带    说明
+     house_id   string      是     房屋id
+     start_date   string      是     开始时间
+     end_date   string      是    结束时间时间
+
+    返回参数:
+
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4103':上传参数异常;'4301':上传失败,'4001'数据库异常
+        ERRMSG     string      是       错误内容
+    18. order 接单
+    url:/api/house/my$
+    method:get
+
+
+    参数名称     类型      是否必带    说明
+     custom   string      是        权限
+
+
+    返回参数:
+
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4103':上传参数异常;'4301':上传失败,'4001'数据库异常
+        ERRMSG     string      是       错误内容
+        orders     json        否        订单信息
+
+    19. 拒单
+    url:/api/order/reject$
+    method:post
+    参数格式：json
+
+    参数名称     类型      是否必带    说明
+     order_id   string      是     订单id
+
+
+    返回参数:
+
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4103':上传参数异常;'4301':上传失败,'4001'数据库异常
+        ERRMSG     string      是       错误内容
+    20. 房屋过滤列表数据（使用缓存）
+    url:/api/house/reject$
+    method:post
+    参数格式：json
+
+    参数名称     类型      是否必带    说明
+     order_id   string      是     订单id
+     reject_reason   string      是     拒单的理由
+
+
+    返回参数:
+
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4103':上传参数异常;'4301':上传失败,'4001'数据库异常
+        ERRMSG     string      是       错误内容
+    21. 评论
+    url:/api/order/comment$
+    method:post
+    参数格式：json
+
+    参数名称     类型      是否必带    说明
+     order_id   string      是     订单id
+     comment   string      是     评论
+
+
+    返回参数:
+
+        参数名称     类型      是否必带    说明
+        ERRCODE    string      是       '0':成功;'4103':上传参数异常;'4301':上传失败,'4001'数据库异常
+        ERRMSG     string      是       错误内容
+
+
+
+
+
+
 
 
 

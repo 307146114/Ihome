@@ -46,7 +46,7 @@ CREATE TABLE ih_house_info (
 	hi_order_count INT UNSIGNED NOT NULL DEFAULT '1' COMMENT '下单数量',
 	hi_verify_status TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '审核状态，0-待审核，1-审核未通过，2-审核通过',
 	hi_online_status TINYINT UNSIGNED NOT NULL DEFAULT '1' COMMENT '0-下线，1-上线',
-	hi_index_image_url VARCHAR ( 256 ) NOT NULL COMMENT '房屋主图片url',
+	hi_index_image_url VARCHAR ( 256 )  NULL COMMENT '房屋主图片url',
 	hi_utime datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后更新时间',
 	hi_ctime datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
 	PRIMARY KEY ( hi_house_id ),
@@ -82,7 +82,7 @@ CREATE TABLE ih_order_info (
 	oi_house_price INT UNSIGNED NOT NULL COMMENT '房屋单价，单位分',
 	oi_amount INT UNSIGNED NOT NULL COMMENT '订单金额，单位分',
 	oi_status TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '订单状态，0-待接单，1-待支付，2-已支付，3-待评价，4-已完成，5-已取消，6-拒接单',
-	oi_comment text NOT NULL COMMENT '订单评论',
+	oi_comment text  NULL COMMENT '订单评论',
 	oi_utime datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后更新时间',
 	oi_ctime datetime NOT NULL DEFAULT CURRENT_TIMESTAMP  COMMENT '创建时间',
 	PRIMARY KEY ( oi_order_id ),
@@ -99,3 +99,11 @@ CREATE TABLE ih_house_image  (
 	PRIMARY KEY ( hi_image_id ),
  CONSTRAINT FOREIGN KEY (hi_house_id) REFERENCES ih_house_info (hi_house_id)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT = '房屋图片表';
+
+-- 设施表
+CREATE TABLE ih_facility_catelog  (
+  `ih_facility_id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `ih_facility_name` VARCHAR(255) NOT NULL COMMENT '设施名称',
+  `ih_facility_ctime` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '设置时间',
+  PRIMARY KEY (`ih_facility_id`)
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT = '房屋设置表';
